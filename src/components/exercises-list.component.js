@@ -7,7 +7,7 @@ const Exercise = props => (
         <td>{props.exercise.username}</td>
         <td>{props.exercise.description}</td>
         <td>{props.exercise.duration}</td>
-        <td>{props.exercise.date.substring(0, 10)}</td>
+        <td>{new Date(props.exercise.date).toLocaleDateString()}</td>
         <td>
             <Link to={`/edit/${props.exercise._id}`} state={{ id: props.exercise._id }}>
                 edit

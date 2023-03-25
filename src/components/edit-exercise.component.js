@@ -19,19 +19,25 @@ export default function EditExercise() {
 
     useState(() => {
         const getData = async () => {
-            const response = await axios.get('http://localhost:5000/exercises/' + params.id);
-            const data = await response.json();
-            console.log(data);
-            setUsername(data.username);
-            setDescription(data.description);
-            setDuration(data.duration);
-            setDate(new Date(data.date));
+            try {
+                const response = await axios.get(`http://localhost:5000/exercises/${params.id}`);
+                const data = await response.data;
+
+                setUsername(data.username);
+                setDescription(data.description);
+                setDuration(data.duration);
+                setDate(new Date(data.date));
+            }
+            catch (error) {
+                console.error(error);
+            }
+
         };
         getData()
 
         const getUsers = async () => {
             const response = await axios.get('http://localhost:5000/users/');
-            const data = await response.json();
+            const data = await response.data;
             setUsers(data.map(user => user.username));
         };
         getUsers();
@@ -65,10 +71,16 @@ export default function EditExercise() {
         }
         console.log(exercise);
 
-        axios.post(`http://localhost:5000/exercises/update/${params.id}`, exercise)
-            .then(res => {
+        const updateExercise = async () => {
+            try {
+                await axios.post(`http://localhost:5000/exercises/update/${params.id}`, exercise)
                 navigate('/');
-            });
+            }
+            catch (error) {
+                console.error(error);
+            }
+        }
+        updateExercise();
     }
 
 
