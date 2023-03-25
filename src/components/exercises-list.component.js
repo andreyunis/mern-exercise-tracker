@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
@@ -19,7 +19,7 @@ const Exercise = props => (
 export default function ExercisesList() {
     const [exercises, setExercises] = useState([]);
 
-    useState(() => {
+    useEffect(() => {
         const getExercises = async () => {
             const response = await fetch('http://localhost:5000/exercises/')
             const data = await response.json()
@@ -30,9 +30,9 @@ export default function ExercisesList() {
     })
 
 
-    const deleteExercise = (id) => {
-        axios.delete(`http://localhost:5000/exercises/${id}`)
-            .then(res => console.log(res.data));
+    const deleteExercise = async (id) => {
+        const res = await axios.delete(`http://localhost:5000/exercises/${id}`)
+        console.log(res.data)
         setExercises(exercises.filter(el => el._id !== id))
     }
 

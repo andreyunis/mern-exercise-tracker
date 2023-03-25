@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import DatePicker from 'react-datepicker';
 import axios from 'axios';
@@ -17,7 +17,7 @@ export default function EditExercise() {
 
     const userInputRef = useRef('userInput');
 
-    useState(() => {
+    useEffect(() => {
         const getData = async () => {
             try {
                 const response = await axios.get(`http://localhost:5000/exercises/${params.id}`);
@@ -31,7 +31,6 @@ export default function EditExercise() {
             catch (error) {
                 console.error(error);
             }
-
         };
         getData()
 
@@ -60,7 +59,7 @@ export default function EditExercise() {
         setDate(date)
     }
 
-    const onSubmit = (e) => {
+    const onSubmit = async (e) => {
         e.preventDefault();
 
         const exercise = {
@@ -70,17 +69,14 @@ export default function EditExercise() {
             date: date,
         }
         console.log(exercise);
-
-        const updateExercise = async () => {
-            try {
-                await axios.post(`http://localhost:5000/exercises/update/${params.id}`, exercise)
-                navigate('/');
-            }
-            catch (error) {
-                console.error(error);
-            }
+        try {
+            await axios.post(`http://localhost:5000/exercises/update/${params.id}`, exercise)
+            navigate('/');
         }
-        updateExercise();
+        catch (error) {
+            console.error(error);
+        }
+
     }
 
 
