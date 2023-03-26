@@ -7,9 +7,12 @@ import ExercisesList from "./components/exercises-list.component";
 import EditExercise from "./components/edit-exercise.component";
 import CreateExercise from "./components/create-exercise.component";
 import CreateUser from "./components/create-user.component";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
+    
     <Router>
       <div className="container">
         <Navbar/>
@@ -21,6 +24,7 @@ function App() {
           <Route path="/user" element={<CreateUser />} />
         </Routes>
       </div>
+      <ToastContainer />
     </Router>
   );
 }

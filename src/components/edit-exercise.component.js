@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import DatePicker from 'react-datepicker';
 import axios from 'axios';
 import "react-datepicker/dist/react-datepicker.css";
+import { toast } from 'react-toastify';
 
 
 export default function EditExercise() {
@@ -71,6 +72,7 @@ export default function EditExercise() {
         console.log(exercise);
         try {
             await axios.post(`http://localhost:5000/exercises/update/${params.id}`, exercise)
+            toast("Exercises updated");
             navigate('/');
         }
         catch (error) {
