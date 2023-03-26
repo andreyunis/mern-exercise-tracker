@@ -29,7 +29,6 @@ export default function ExercisesList() {
         getExercises();
     })
 
-
     const deleteExercise = async (id) => {
         const res = await axios.delete(`http://localhost:5000/exercises/${id}`)
         console.log(res.data)
@@ -41,7 +40,6 @@ export default function ExercisesList() {
             return <Exercise exercise={currentExercise} deleteExercise={deleteExercise} key={currentExercise._id} />;
         })
     }
-
 
     return (
         <div>

@@ -78,9 +78,7 @@ export default function EditExercise() {
         catch (error) {
             console.error(error);
         }
-
     }
-
 
     return (
         <div>
