@@ -15,6 +15,18 @@ router.route('/add').post((req, res) => {
     newUser.save()
         .then(users => res.json('User added!'))
         .catch(err => res.status(400).json('Error: ' + err));
+});
+
+router.route('/:id').update((req, res) => {
+    User.findById(req.params.id)
+        .then(exercise => res.json(exercise))
+        .catch(err => res.status(400).json('Error: ' + err));
+
+    const newUser = new User({username});
+
+    newUser.save()
+        .then(users => res.json('User added!'))
+        .catch(err => res.status(400).json('Error: ' + err));
 }) 
 
 module.exports = router;
